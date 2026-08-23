@@ -1,0 +1,131 @@
+/* ========================================
+   Jordaci - Costura & Arte
+   Custom Styles
+   ======================================== */
+
+body {
+    background-color: #111111;
+    color: #E5E5E5;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 4px;
+}
+
+/* Gradient de texto dourado */
+.text-gradient-gold {
+    background: linear-gradient(135deg, #FDF7E3 0%, #D4AF37 50%, #A6821C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Animações de entrada (Reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+/* Galeria */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.gallery-item.hide {
+    display: none;
+}
+.gallery-item img {
+    transition: transform 0.5s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+.gallery-overlay {
+    background: linear-gradient(to top, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Botões de filtro */
+.filter-btn.active {
+    background-color: #D4AF37;
+    color: #111111;
+    border-color: #D4AF37;
+}
+
+/* Inputs */
+.input-friendly {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input-friendly:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+.input-friendly::placeholder {
+    color: #737373;
+}
+
+/* Accordion FAQ */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Menu mobile - trava scroll */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Focus visible */
+:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 2px;
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+    .gallery-item img,
+    .gallery-overlay,
+    .filter-btn {
+        transition: none;
+    }
+}
