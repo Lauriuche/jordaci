@@ -1,5 +1,5 @@
 /**
- * Jordaci - Costura & Arte
+ * Jordaci - Costura & Arte (v2)
  * Main JavaScript
  */
 
@@ -10,11 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initGalleryFilter();
     initContactForm();
     initSuccessModal();
+    initPrivacyModal();
 });
 
-/* ========================================
-   Reveal on Scroll
-   ======================================== */
 function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
@@ -30,9 +28,6 @@ function initReveal() {
     reveals.forEach(el => observer.observe(el));
 }
 
-/* ========================================
-   Navbar Shadow on Scroll
-   ======================================== */
 function initNavbar() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
@@ -51,9 +46,6 @@ function initNavbar() {
     handleScroll();
 }
 
-/* ========================================
-   Mobile Menu
-   ======================================== */
 function initMobileMenu() {
     const mobileBtn = document.getElementById('mobileMenuBtn');
     const closeBtn = document.getElementById('closeMenuBtn');
@@ -76,10 +68,7 @@ function initMobileMenu() {
 
     mobileBtn.addEventListener('click', openMenu);
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-
-    links.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
+    links.forEach(link => link.addEventListener('click', closeMenu));
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
@@ -88,9 +77,6 @@ function initMobileMenu() {
     });
 }
 
-/* ========================================
-   Gallery Filter
-   ======================================== */
 function initGalleryFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -117,18 +103,13 @@ function initGalleryFilter() {
                 } else {
                     item.style.opacity = '0';
                     item.style.transform = 'scale(0.85)';
-                    setTimeout(() => {
-                        item.classList.add('hide');
-                    }, 300);
+                    setTimeout(() => item.classList.add('hide'), 300);
                 }
             });
         });
     });
 }
 
-/* ========================================
-   Contact Form → WhatsApp
-   ======================================== */
 function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -150,47 +131,49 @@ function initContactForm() {
         texto += `*Nome:* ${name}\n`;
         texto += `*Telefone:* ${phone}\n`;
         texto += `*Serviço:* ${service}\n`;
-        if (message) {
-            texto += `*Detalhes:* ${message}\n`;
-        }
+        if (message) texto += `*Detalhes:* ${message}\n`;
         texto += `\nGostaria de um orçamento, por favor.`;
 
         const url = `https://wa.me/5599991325326?text=${encodeURIComponent(texto)}`;
         window.open(url, '_blank', 'noopener,noreferrer');
 
         const modal = document.getElementById('successModal');
-        if (modal) {
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-        }
+        if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
 
         form.reset();
     });
 }
 
-/* ========================================
-   Success Modal
-   ======================================== */
 function initSuccessModal() {
     const modal = document.getElementById('successModal');
     const closeBtn = document.getElementById('closeSuccessBtn');
-
     if (!modal) return;
 
-    const closeModal = () => {
-        modal.classList.add('opacity-0', 'pointer-events-none');
-    };
+    const close = () => modal.classList.add('opacity-0', 'pointer-events-none');
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-    }
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) {
-            closeModal();
-        }
+        if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) close();
+    });
+}
+
+function initPrivacyModal() {
+    const modal = document.getElementById('privacyModal');
+    const openBtn = document.getElementById('privacyLink');
+    const closeBtn = document.getElementById('closePrivacyBtn');
+    if (!modal) return;
+
+    const open = (e) => {
+        e.preventDefault();
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+    };
+    const close = () => modal.classList.add('opacity-0', 'pointer-events-none');
+
+    if (openBtn) openBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) close();
     });
 }
