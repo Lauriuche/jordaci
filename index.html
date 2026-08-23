@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordaci | Costura, Ajustes e Roupas Sob Medida em Grajaú</title>
+    <meta name="description" content="Atelier Jordaci em Grajaú-MA. Fazemos consertos, ajustes, vestidos de festa, conjuntos e equipagem esportiva com capricho e preço justo. Peça um orçamento!">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="BR-MA">
+    <meta name="geo.placename" content="Grajaú">
+    <link rel="canonical" href="https://seudominio.com.br">
+
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:title" content="Jordaci | Costura, Ajustes e Capricho">
+    <meta property="og:description" content="Do conserto do jeans à equipagem esportiva do seu time. Atendimento em Grajaú com agilidade e preço justo.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1605020420620-20c943cc4669?auto=format&fit=crop&q=80&w=800">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧵</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            light: '#FDF7E3',
+                            DEFAULT: '#D4AF37',
+                            dark: '#A6821C',
+                        },
+                        onyx: {
+                            950: '#0A0A0A',
+                            900: '#111111',
+                            800: '#1A1A1A',
+                            700: '#222222',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Atelier Jordaci",
+      "description": "Costura, ajustes, vestidos de festa, conjuntos e equipagem esportiva em Grajaú-MA",
+      "url": "https://seudominio.com.br",
+      "telephone": "+5599991325326",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Grajaú",
+        "addressRegion": "MA",
+        "addressCountry": "BR"
+      },
+      "openingHours": ["Mo-Fr 08:00-18:00", "Sa 08:00-12:00"],
+      "priceRange": "$$",
+      "image": "https://images.unsplash.com/photo-1605020420620-20c943cc4669?auto=format&fit=crop&q=80&w=800"
+    }
+    </script>
+</head>
+<body class="antialiased selection:bg-gold selection:text-onyx-900">
+
+    <!-- NAVEGAÇÃO -->
+    <header class="fixed top-0 w-full z-50 transition-all duration-300 bg-onyx-900 border-b border-white/10 py-3" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="#inicio" class="flex flex-col items-center" aria-label="Ir para o topo">
+                <span class="font-serif text-2xl tracking-wider text-gold font-bold">Jordaci</span>
+                <span class="font-sans text-[9px] tracking-widest text-neutral-400 uppercase mt-0.5">Costura & Arte</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-sans font-medium text-neutral-300" aria-label="Menu principal">
+                <a href="#sobre" class="hover:text-gold transition-colors">Sobre Nós</a>
+                <a href="#servicos" class="hover:text-gold transition-colors">Serviços</a>
+                <a href="#galeria" class="hover:text-gold transition-colors">Nossos Trabalhos</a>
+                <a href="#faq" class="hover:text-gold transition-colors">Dúvidas</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="https://wa.me/5599991325326" target="_blank" rel="noopener noreferrer"
+                   class="bg-gold text-onyx-900 font-sans text-sm font-bold px-6 py-2.5 rounded-full hover:bg-gold-light transition-colors flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Fale com a gente
+                </a>
+            </div>
+
+            <button class="md:hidden text-gold focus:outline-none focus:ring-2 focus:ring-gold rounded"
+                    id="mobileMenuBtn"
+                    aria-label="Abrir menu"
+                    aria-expanded="false"
+                    aria-controls="mobileMenu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="fixed inset-0 bg-onyx-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col p-8"
+             id="mobileMenu"
+             role="dialog"
+             aria-modal="true"
+             aria-label="Menu de navegação">
+            <div class="flex justify-end mb-8">
+                <button id="closeMenuBtn" class="text-gold focus:outline-none focus:ring-2 focus:ring-gold rounded" aria-label="Fechar menu">
+                    <i class="fa-solid fa-xmark text-3xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-xl font-serif text-white" aria-label="Menu mobile">
+                <a href="#sobre" class="mobile-link hover:text-gold">Sobre Nós</a>
+                <a href="#servicos" class="mobile-link hover:text-gold">Nossos Serviços</a>
+                <a href="#galeria" class="mobile-link hover:text-gold">Galeria de Trabalhos</a>
+                <a href="#depoimentos" class="mobile-link hover:text-gold">Avaliações</a>
+                <a href="#contato" class="mobile-link hover:text-gold">Pedir Orçamento</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="relative pt-32 pb-20 md:py-40 flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-semibold">
+                    <i class="fa-solid fa-location-dot"></i> Seu Atelier em Grajaú-MA
+                </div>
+
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+                    Costura bem feita e o <span class="text-gradient-gold font-bold">caimento perfeito</span> para você.
+                </h1>
+
+                <p class="font-sans text-base text-neutral-300 max-w-lg leading-relaxed">
+                    Do conserto daquela calça jeans que você ama, à equipagem esportiva do seu time ou o vestido da sua festa. Atendimento pertinho de você, com agilidade e preço justo.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="https://wa.me/5599991325326" target="_blank" rel="noopener noreferrer"
+                       class="bg-gold text-onyx-900 text-center font-bold px-8 py-3.5 rounded-lg hover:bg-gold-light transition-colors text-sm shadow-lg shadow-gold/20">
+                        <i class="fa-brands fa-whatsapp mr-2"></i> Fazer um Orçamento
+                    </a>
+                    <a href="#galeria" class="border border-white/20 text-white text-center font-bold px-8 py-3.5 rounded-lg hover:bg-white/10 transition-colors text-sm">
+                        Ver nossos trabalhos
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative reveal delay-200">
+                <div class="aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden border-2 border-gold/20 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1605020420620-20c943cc4669?auto=format&fit=crop&q=80&w=800"
+                         alt="Costureira medindo tecido com precisão"
+                         width="800" height="600"
+                         class="w-full h-full object-cover"
+                         loading="eager">
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-onyx-800 border border-gold/30 p-4 rounded-xl flex items-center gap-4 shadow-xl">
+                    <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold text-xl">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-white text-sm">Qualidade Garantida</p>
+                        <p class="text-xs text-neutral-400">Anos de experiência</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="py-20 bg-onyx-800 relative border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-6">Tradição, agulha e linha na sua região.</h2>
+                <div class="space-y-4 text-neutral-300 font-sans leading-relaxed">
+                    <p>
+                        O <strong>Atelier Jordaci</strong> nasceu da paixão por resolver problemas. Sabemos como é frustrante ter uma roupa que não serve direito, um uniforme rasgado, ou querer um modelo específico e não encontrar nas lojas.
+                    </p>
+                    <p>
+                        A nossa missão é ser a sua solução rápida e de confiança aqui na cidade. Seja fazendo a barra original de uma calça, produzindo a equipagem de futebol do time do bairro, costurando conjuntos para o verão ou criando vestidos para datas especiais.
+                    </p>
+                    <p class="font-medium text-gold">Aqui, você não é apenas um número. Entendemos o seu pedido e entregamos no prazo combinado.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 reveal delay-200">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&q=80&w=500"
+                     alt="Máquina de costura profissional"
+                     width="500" height="400"
+                     class="rounded-lg object-cover h-48 w-full shadow-lg"
+                     loading="lazy">
+                <img src="https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?auto=format&fit=crop&q=80&w=500"
+                     alt="Linhas coloridas de costura"
+                     width="500" height="400"
+                     class="rounded-lg object-cover h-48 w-full mt-8 shadow-lg"
+                     loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="py-20 bg-onyx-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-gold font-bold tracking-widest text-sm uppercase">O que nós fazemos</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">Nossos Serviços</h2>
+                <p class="text-neutral-400 mt-3">Tudo o que o seu guarda-roupa precisa num só lugar.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-onyx-800 p-6 rounded-xl border border-white/5 hover:border-gold/50 transition-colors group reveal">
+                    <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-2">Consertos & Ajustes</h3>
+                    <p class="text-neutral-400 text-sm">Bainhas (barras), trocas de zíper, ajustes de cintura, apertos e reparos em geral. Roupa nova de novo.</p>
+                </div>
+
+                <div class="bg-onyx-800 p-6 rounded-xl border border-white/5 hover:border-gold/50 transition-colors group reveal delay-100">
+                    <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-2">Roupas Sob Medida</h3>
+                    <p class="text-neutral-400 text-sm">Traz a foto que a gente faz! Conjuntos, camisas, calças, saias e shorts com medidas perfeitas para o seu corpo.</p>
+                </div>
+
+                <div class="bg-onyx-800 p-6 rounded-xl border border-white/5 hover:border-gold/50 transition-colors group reveal delay-200">
+                    <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-volleyball"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-2">Equipagem & Fardas</h3>
+                    <p class="text-neutral-400 text-sm">Equipamentos esportivos para times de futebol/vôlei e uniformes profissionais para empresas e comércios locais.</p>
+                </div>
+
+                <div class="bg-onyx-800 p-6 rounded-xl border border-white/5 hover:border-gold/50 transition-colors group reveal delay-300">
+                    <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-2">Vestidos & Festas</h3>
+                    <p class="text-neutral-400 text-sm">Vestidos para madrinhas, formaturas, casamentos ou apenas para aquela festa no final de semana.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria" class="py-20 bg-onyx-800 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10 reveal">
+                <span class="text-gold font-bold tracking-widest text-sm uppercase">Portfólio</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">Nossos Trabalhos</h2>
+                <p class="text-neutral-400 mt-3">Um pouco da nossa variedade e dedicação no dia a dia.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-10 reveal" role="group" aria-label="Filtros da galeria">
+                <button class="filter-btn active px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="all">Todos</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="vestidos">Vestidos</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="esportes">Equipagens</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="casuais">Conjuntos & Shorts</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="consertos">Consertos</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="galleryGrid">
+                <div class="gallery-item aspect-square bg-onyx-900 reveal" data-category="vestidos">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=800"
+                         alt="Vestidos de festa e casamento"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Vestidos</h4>
+                        <p class="text-gold text-sm">Festa, Casamento e Dia a Dia</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item aspect-square bg-onyx-900 reveal delay-100" data-category="esportes">
+                    <img src="https://images.unsplash.com/photo-1589317621430-863a3286f91f?auto=format&fit=crop&q=80&w=800"
+                         alt="Equipagem esportiva para times"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Equipagem Esportiva</h4>
+                        <p class="text-gold text-sm">Uniformes para Times</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item aspect-square bg-onyx-900 reveal delay-200" data-category="consertos">
+                    <img src="https://images.unsplash.com/photo-1605020420620-20c943cc4669?auto=format&fit=crop&q=80&w=800"
+                         alt="Consertos e ajustes de roupas"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Consertos</h4>
+                        <p class="text-gold text-sm">Barras, Zíperes e Apertos</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item aspect-square bg-onyx-900 reveal" data-category="casuais">
+                    <img src="https://images.unsplash.com/photo-1598522325752-168ce75ec82a?auto=format&fit=crop&q=80&w=800"
+                         alt="Conjuntos casuais e alfaiataria"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Conjuntos</h4>
+                        <p class="text-gold text-sm">Alfaiataria e Casuais</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item aspect-square bg-onyx-900 reveal delay-100" data-category="casuais">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e32f6b717?auto=format&fit=crop&q=80&w=800"
+                         alt="Camisas sociais, polo e fardas"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Camisas</h4>
+                        <p class="text-gold text-sm">Sociais, Polo e Fardas</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item aspect-square bg-onyx-900 reveal delay-200" data-category="casuais">
+                    <img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&q=80&w=800"
+                         alt="Shorts, bermudas e peças de linho"
+                         width="800" height="800"
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-serif text-xl font-bold mb-1">Shorts</h4>
+                        <p class="text-gold text-sm">Bermudas, Tactel e Linho</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="py-20 bg-onyx-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-gold font-bold tracking-widest text-sm uppercase">Avaliações</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">O que o pessoal diz</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-onyx-800 p-8 rounded-2xl border border-white/5 reveal flex flex-col h-full">
+                    <div class="text-gold mb-4" aria-label="5 estrelas">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-neutral-300 italic mb-6 flex-grow">"Pedi para fazerem o uniforme esportivo pro time aqui da rua. Ficaram top demais! Costura resistente, não rasga fácil no jogo e o preço ficou show."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-dark/20 text-gold flex items-center justify-center font-bold">MS</div>
+                        <div>
+                            <p class="font-bold text-white text-sm">Marcos Silva</p>
+                            <p class="text-xs text-neutral-500">Time Local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-onyx-800 p-8 rounded-2xl border border-white/5 reveal delay-100 flex flex-col h-full">
+                    <div class="text-gold mb-4" aria-label="5 estrelas">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-neutral-300 italic mb-6 flex-grow">"Sempre trago minhas calças para fazer barra e apertar a cintura. O conserto é super rápido e ninguém diz que a calça foi mexida. Indico para todos!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-dark/20 text-gold flex items-center justify-center font-bold">AP</div>
+                        <div>
+                            <p class="font-bold text-white text-sm">Ana Paula</p>
+                            <p class="text-xs text-neutral-500">Cliente Fiel</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-onyx-800 p-8 rounded-2xl border border-white/5 reveal delay-200 flex flex-col h-full">
+                    <div class="text-gold mb-4" aria-label="5 estrelas">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-neutral-300 italic mb-6 flex-grow">"Levei a foto de um conjunto que vi na internet e eles fizeram igualzinho pra mim, sob medida! Ganhei uma cliente fixa, o capricho é nota 10."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-dark/20 text-gold flex items-center justify-center font-bold">JC</div>
+                        <div>
+                            <p class="font-bold text-white text-sm">Juliane Costa</p>
+                            <p class="text-xs text-neutral-500">Roupas sob medida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-onyx-800 border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">Dúvidas Frequentes</h2>
+            </div>
+
+            <div class="space-y-4 reveal delay-100">
+                <details class="bg-onyx-900 rounded-xl border border-white/5 group">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+                        <span>Vocês aceitam cartão de crédito ou PIX?</span>
+                        <span class="transition group-open:rotate-180 text-gold"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-neutral-400 text-sm mt-3 p-5 pt-0 border-t border-white/5">Sim! Aceitamos PIX, dinheiro e dividimos no cartão de crédito para facilitar o seu pagamento.</p>
+                </details>
+
+                <details class="bg-onyx-900 rounded-xl border border-white/5 group">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+                        <span>Quanto tempo demora um conserto simples (bainha, zíper)?</span>
+                        <span class="transition group-open:rotate-180 text-gold"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-neutral-400 text-sm mt-3 p-5 pt-0 border-t border-white/5">Consertos simples geralmente ficam prontos em 1 a 2 dias úteis, dependendo da demanda do dia. Se tiver urgência, avise-nos!</p>
+                </details>
+
+                <details class="bg-onyx-900 rounded-xl border border-white/5 group">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+                        <span>Vocês fazem fardamento para pequenas empresas?</span>
+                        <span class="transition group-open:rotate-180 text-gold"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-neutral-400 text-sm mt-3 p-5 pt-0 border-t border-white/5">Com certeza! Fazemos fardamentos, aventais e camisas para empresas de todos os tamanhos aqui na região.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="py-20 bg-onyx-900 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="reveal">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Vem tomar um café com a gente!</h2>
+                <p class="text-neutral-400 mb-8">Precisa de um conserto rápido ou quer fazer um vestido ou equipagem esportiva? Preencha o formulário, chame no Zap ou venha nos visitar.</p>
+
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-onyx-800 rounded-full flex items-center justify-center text-gold border border-white/5">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral-500">Nosso WhatsApp</p>
+                            <a href="https://wa.me/5599991325326" class="text-white font-bold text-lg hover:text-gold transition-colors">(99) 99132-5326</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-onyx-800 rounded-full flex items-center justify-center text-gold border border-white/5">
+                            <i class="fa-regular fa-clock text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral-500">Horário de Funcionamento</p>
+                            <p class="text-white font-bold">Seg a Sex: 08h às 18h | Sáb: 08h às 12h</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full h-48 rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15875.056976692291!2d-46.1558235!3d-5.8171092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92c55eeb5e913ad1%3A0xc3af8483bda49591!2sGraja%C3%BA%20-%20MA!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                            width="100%" height="100%" style="border:0;"
+                            allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Localização do Atelier Jordaci em Grajaú-MA"></iframe>
+                </div>
+            </div>
+
+            <div class="bg-onyx-800 p-8 rounded-2xl shadow-2xl border border-white/5 reveal delay-200">
+                <h3 class="text-xl text-white font-serif mb-6 border-b border-white/10 pb-4">Peça seu orçamento sem compromisso</h3>
+                <form id="contactForm" class="space-y-4" novalidate>
+                    <div>
+                        <label for="name" class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Seu Nome</label>
+                        <input type="text" id="name" name="name" required
+                               placeholder="Como podemos te chamar?"
+                               class="input-friendly"
+                               autocomplete="name">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">WhatsApp / Celular</label>
+                        <input type="tel" id="phone" name="phone" required
+                               placeholder="(99) 90000-0000"
+                               class="input-friendly"
+                               inputmode="tel"
+                               autocomplete="tel">
+                    </div>
+                    <div>
+                        <label for="service" class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">O que você precisa hoje?</label>
+                        <select id="service" name="service" required class="input-friendly appearance-none text-white cursor-pointer">
+                            <option value="Consertos">Consertos e Ajustes em geral</option>
+                            <option value="Equipagem">Equipagem Esportiva / Uniformes</option>
+                            <option value="Vestidos">Vestidos (Festa, Casuais)</option>
+                            <option value="Conjuntos">Conjuntos / Shorts / Camisas</option>
+                            <option value="Outros">Outra coisa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Detalhes (Opcional)</label>
+                        <textarea id="message" name="message" rows="3"
+                                  placeholder="Ex: Preciso fazer a barra de 3 calças e apertar a cintura..."
+                                  class="input-friendly resize-none"></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-gold text-onyx-900 font-bold py-4 rounded-lg hover:bg-gold-light transition-colors mt-4 text-sm tracking-wide">
+                        Abrir WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-onyx-950 border-t border-white/5 py-10 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <span class="font-serif text-2xl tracking-widest text-gold font-bold">Jordaci</span>
+            <p class="text-neutral-500 text-sm mt-2">Costura, Ajustes e Capricho no seu bairro. Grajaú - MA.</p>
+            <div class="flex justify-center gap-4 mt-6">
+                <a href="#" class="w-10 h-10 rounded-full bg-onyx-800 flex items-center justify-center text-neutral-400 hover:text-gold transition-colors"
+                   aria-label="Instagram (em breve)">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/5599991325326" target="_blank" rel="noopener noreferrer"
+                   class="w-10 h-10 rounded-full bg-onyx-800 flex items-center justify-center text-neutral-400 hover:text-gold transition-colors"
+                   aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+            <p class="text-neutral-600 text-xs mt-8">© 2026 Jordaci Costura & Arte. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <a href="https://wa.me/5599991325326" target="_blank" rel="noopener noreferrer"
+       aria-label="Fale conosco no WhatsApp"
+       class="fixed bottom-6 right-6 z-50 flex items-center group">
+        <div class="absolute right-14 bg-onyx-800 border border-gold/30 text-white text-xs font-medium py-2.5 px-4 rounded-l-full rounded-r-none opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap shadow-lg">
+            Entre em contato
+        </div>
+        <div class="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white text-3xl shadow-xl shadow-[#25D366]/30 hover:scale-110 transition-transform duration-300 relative z-10">
+            <i class="fa-brands fa-whatsapp"></i>
+        </div>
+    </a>
+
+    <!-- MODAL DE SUCESSO -->
+    <div id="successModal"
+         class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300"
+         role="dialog" aria-modal="true" aria-labelledby="successTitle">
+        <div class="bg-onyx-800 border border-gold/30 max-w-sm w-full rounded-2xl p-8 text-center shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center text-gold mx-auto text-3xl mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 id="successTitle" class="font-serif text-2xl text-white mb-2">Tudo certo!</h3>
+            <p class="text-neutral-400 text-sm mb-6">Logo vamos te responder lá no WhatsApp para combinarmos o orçamento.</p>
+            <button id="closeSuccessBtn" class="w-full bg-gold text-onyx-900 font-bold py-3 rounded-lg hover:bg-gold-light transition-colors">
+                Beleza, fechar
+            </button>
+        </div>
+    </div>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>
