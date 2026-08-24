@@ -102,3 +102,8 @@ body.menu-open { overflow: hidden; }
         transition: none;
     }
 }
+#galleryPrev:disabled,
+#galleryNext:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
