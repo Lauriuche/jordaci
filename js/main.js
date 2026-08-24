@@ -9,34 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initSuccessModal();
     initPrivacyModal();
-    initAutoGallery(); // ← nova função
+    initAutoGallery();
 });
 
 /* ========================================
    CONFIGURAÇÃO DA GALERIA AUTOMÁTICA
    ======================================== */
 const GITHUB_CONFIG = {
-    user: 'web-sas',        // ← troque
-    repo: 'jordaci',   // ← troque
-    path: 'imagens/galeria',           // pasta raiz das imagens
-    branch: 'main'                    // ou 'master'
+    user: 'web-sas',
+    repo: 'jordaci',
+    path: 'imagens/galeria',
+    branch: 'main'
 };
-
-/*
-  ESTRUTURA RECOMENDADA NO REPOSITÓRIO:
-
-  images/
-    galeria/
-      vestidos/
-        foto1.jpg
-        foto2.jpg
-      esportes/
-        uniforme1.jpg
-      casuais/
-        conjunto1.jpg
-      consertos/
-        barra1.jpg
-*/
 
 /* ========================================
    Galeria Automática via GitHub API
@@ -48,12 +32,11 @@ async function initAutoGallery() {
 
     if (!grid) return;
 
-    // Mostra loading
     if (loading) loading.classList.remove('hidden');
     if (errorBox) errorBox.classList.add('hidden');
 
     try {
-        const baseUrl = `https://api.github.com/repos/\( {GITHUB_CONFIG.user}/ \){GITHUB_CONFIG.repo}/contents/\( {GITHUB_CONFIG.path}?ref= \){GITHUB_CONFIG.branch}`;
+        const baseUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
         
         const response = await fetch(baseUrl);
         if (!response.ok) {
@@ -62,25 +45,24 @@ async function initAutoGallery() {
 
         const items = await response.json();
 
-        // Separa pastas (categorias) e arquivos (imagens soltas)
         const folders = items.filter(item => item.type === 'dir');
         const rootImages = items.filter(item => item.type === 'file' && isImage(item.name));
 
         let allImages = [];
 
-        // 1. Imagens soltas na raiz da pasta
+        // Imagens soltas na raiz
         rootImages.forEach(file => {
             allImages.push({
                 url: file.download_url,
                 name: file.name,
-                category: 'all' // ou 'casuais' como padrão
+                category: 'all'
             });
         });
 
-        // 2. Imagens dentro de subpastas (categorias)
+        // Imagens dentro das subpastas (categorias)
         for (const folder of folders) {
-            const category = folder.name.toLowerCase(); // vestidos, esportes, etc.
-            const folderUrl = `https://api.github.com/repos/\( {GITHUB_CONFIG.user}/ \){GITHUB_CONFIG.repo}/contents/\( {GITHUB_CONFIG.path}/ \){folder.name}?ref=${GITHUB_CONFIG.branch}`;
+            const category = folder.name.toLowerCase();
+            const folderUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}/${folder.name}?ref=${GITHUB_CONFIG.branch}`;
             
             const folderRes = await fetch(folderUrl);
             if (!folderRes.ok) continue;
@@ -97,14 +79,12 @@ async function initAutoGallery() {
                 });
         }
 
-        // Limpa a grade
         grid.innerHTML = '';
 
         if (allImages.length === 0) {
             throw new Error('Nenhuma imagem encontrada na pasta.');
         }
 
-        // Cria os cards
         allImages.forEach((img, index) => {
             const item = document.createElement('div');
             item.className = `gallery-item aspect-square bg-onyx-900 reveal ${index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''}`;
@@ -118,14 +98,13 @@ async function initAutoGallery() {
                      loading="lazy">
                 <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
                     <h4 class="text-white font-serif text-xl font-bold mb-1">${formatCategory(img.category)}</h4>
-                    <p class="text-gold text-sm">\( {img.name.replace(/\.[^/.]+ \)/, '')}</p>
+                    <p class="text-gold text-sm">${img.name.replace(/\.[^/.]+$/, '')}</p>
                 </div>
             `;
 
             grid.appendChild(item);
         });
 
-        // Reativa o reveal e o filtro
         initReveal();
         initGalleryFilter();
 
@@ -156,7 +135,7 @@ function formatCategory(cat) {
 }
 
 /* ========================================
-   Restante do código (igual ao anterior)
+   Funções auxiliares
    ======================================== */
 
 function initReveal() {
