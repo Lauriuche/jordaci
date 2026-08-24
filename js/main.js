@@ -1,5 +1,5 @@
 /**
- * Jordaci - Costura & Arte (v2 + Galeria Automática GitHub)
+ * Jordaci - Costura & Arte
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initAutoGallery();
 });
 
-/* ========================================
-   CONFIGURAÇÃO DA GALERIA AUTOMÁTICA
-   ======================================== */
 const GITHUB_CONFIG = {
     user: 'web-sas',
     repo: 'jordaci',
@@ -22,9 +19,6 @@ const GITHUB_CONFIG = {
     branch: 'main'
 };
 
-/* ========================================
-   Galeria Automática via GitHub API
-   ======================================== */
 async function initAutoGallery() {
     const grid = document.getElementById('galleryGrid');
     const loading = document.getElementById('galleryLoading');
@@ -40,17 +34,15 @@ async function initAutoGallery() {
         
         const response = await fetch(baseUrl);
         if (!response.ok) {
-            throw new Error(`Erro ${response.status}: não foi possível acessar a pasta no GitHub`);
+            throw new Error('Erro ao acessar a pasta no GitHub');
         }
 
         const items = await response.json();
-
         const folders = items.filter(item => item.type === 'dir');
         const rootImages = items.filter(item => item.type === 'file' && isImage(item.name));
 
         let allImages = [];
 
-        // Imagens soltas na raiz
         rootImages.forEach(file => {
             allImages.push({
                 url: file.download_url,
@@ -59,7 +51,6 @@ async function initAutoGallery() {
             });
         });
 
-        // Imagens dentro das subpastas (categorias)
         for (const folder of folders) {
             const category = folder.name.toLowerCase();
             const folderUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}/${folder.name}?ref=${GITHUB_CONFIG.branch}`;
@@ -82,7 +73,7 @@ async function initAutoGallery() {
         grid.innerHTML = '';
 
         if (allImages.length === 0) {
-            throw new Error('Nenhuma imagem encontrada na pasta.');
+            throw new Error('Nenhuma imagem encontrada.');
         }
 
         allImages.forEach((img, index) => {
@@ -109,9 +100,9 @@ async function initAutoGallery() {
         initGalleryFilter();
 
     } catch (err) {
-        console.error('Galeria automática:', err);
+        console.error(err);
         if (errorBox) {
-            errorBox.textContent = 'Não foi possível carregar as imagens. Verifique a configuração do GitHub.';
+            errorBox.textContent = 'Não foi possível carregar as imagens.';
             errorBox.classList.remove('hidden');
         }
     } finally {
@@ -133,10 +124,6 @@ function formatCategory(cat) {
     };
     return map[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
 }
-
-/* ========================================
-   Funções auxiliares
-   ======================================== */
 
 function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
