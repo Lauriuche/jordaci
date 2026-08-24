@@ -464,6 +464,23 @@
                 <div id="galleryError" class="hidden text-center py-12 text-red-400 text-sm"></div>
         
                 <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6" id="galleryGrid">
+                <div class="flex items-center justify-center gap-6 mt-10" id="galleryPagination">
+                    <button id="galleryPrev" 
+                            class="w-12 h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center"
+                            aria-label="Página anterior">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                
+                    <span id="galleryPageInfo" class="text-neutral-400 text-sm font-medium min-w-[60px] text-center">
+                        1 / 1
+                    </span>
+                
+                    <button id="galleryNext" 
+                            class="w-12 h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center"
+                            aria-label="Próxima página">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
                     <!-- preenchido via JS -->
                 </div>
             </div>
