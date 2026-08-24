@@ -192,14 +192,14 @@
 
                 <div class="flex flex-wrap gap-6 pt-2 text-sm">
                     <div class="flex items-center gap-2">
-                        <span class="text-gold font-bold text-lg">+850</span>
-                        <span class="text-neutral-400">peças entregues</span>
+                        <span id="pecasCounter" class="text-gold font-bold text-lg">+800</span>
+                        <span class="text-neutral-400">peças no portfólio</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-gold font-bold text-lg">4.9</span>
                         <span class="text-neutral-400">★ avaliação média</span>
                     </div>
-                </div>
+                </div>              
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
                     <a href="https://wa.me/5599991325326?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Jordaci%20e%20quero%20fazer%20um%20or%C3%A7amento."
@@ -438,40 +438,36 @@
         </div>
     </section>
 
-    <!-- GALERIA -->
-<section id="galeria" class="py-20 bg-onyx-800 border-y border-white/5">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10 reveal">
-            <span class="text-gold font-bold tracking-widest text-sm uppercase">Portfólio</span>
-            <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">Nossos Trabalhos</h2>
-            <p class="text-neutral-400 mt-3">Imagens carregadas automaticamente do repositório.</p>
-        </div>
-
-        <!-- Filtros -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10 reveal" role="group" aria-label="Filtros da galeria">
-            <button class="filter-btn active px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="all">Todos</button>
-            <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="vestidos">Vestidos</button>
-            <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="esportes">Equipagens</button>
-            <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="casuais">Conjuntos & Shorts</button>
-            <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="consertos">Consertos</button>
-        </div>
-
-        <!-- Loading -->
-        <div id="galleryLoading" class="text-center py-16">
-            <div class="inline-block w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
-            <p class="text-neutral-400 mt-4 text-sm">Carregando trabalhos...</p>
-        </div>
-
-        <!-- Erro -->
-        <div id="galleryError" class="hidden text-center py-12 text-red-400 text-sm"></div>
-
-        <!-- Grade (preenchida automaticamente) -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6" id="galleryGrid">
-            <!-- As imagens serão inseridas aqui via JavaScript -->
-        </div>
-    </div>
-</section>
-    
+           <!-- GALERIA -->
+        <section id="galeria" class="py-20 bg-onyx-800 border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-10 reveal">
+                    <span class="text-gold font-bold tracking-widest text-sm uppercase">Portfólio</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">Nossos Trabalhos</h2>
+                    <p class="text-neutral-400 mt-3">Imagens carregadas automaticamente do repositório.</p>
+                </div>
+        
+                <div class="flex flex-wrap justify-center gap-3 mb-10 reveal" role="group" aria-label="Filtros da galeria">
+                    <button class="filter-btn active px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="all">Todos</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="vestidos">Vestidos</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="esportes">Equipagens</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="casuais">Conjuntos & Shorts</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="uniformes">Fardamentos & Uniformes</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-colors hover:bg-white/10" data-filter="consertos">Consertos</button>
+                </div>
+        
+                <div id="galleryLoading" class="text-center py-16">
+                    <div class="inline-block w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-neutral-400 mt-4 text-sm">Carregando trabalhos...</p>
+                </div>
+        
+                <div id="galleryError" class="hidden text-center py-12 text-red-400 text-sm"></div>
+        
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="galleryGrid">
+                    <!-- preenchido via JS -->
+                </div>
+            </div>
+        </section>   
     <!-- DEPOIMENTOS -->
     <section id="depoimentos" class="py-20 bg-onyx-900">
         <div class="max-w-7xl mx-auto px-6">
@@ -738,5 +734,34 @@
     </div>
 
     <script src="js/main.js" defer></script>
+    <!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <button id="lightboxClose" class="absolute top-4 right-4 text-white text-3xl hover:text-gold transition-colors z-10" aria-label="Fechar">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <button id="lightboxPrev" class="absolute left-3 md:left-6 text-white text-3xl hover:text-gold transition-colors z-10" aria-label="Anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <button id="lightboxNext" class="absolute right-3 md:right-6 text-white text-3xl hover:text-gold transition-colors z-10" aria-label="Próxima">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="max-w-4xl w-full flex flex-col items-center">
+        <img id="lightboxImg" src="" alt="" class="max-h-[70vh] w-auto rounded-lg shadow-2xl object-contain">
+        
+        <div class="mt-5 text-center">
+            <p id="lightboxCategory" class="text-gold text-sm font-medium mb-1"></p>
+            <h3 id="lightboxTitle" class="text-white font-serif text-xl mb-4"></h3>
+            
+            <a id="lightboxWhatsapp" href="#" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:scale-105 transition-transform">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                Quero orçamento deste trabalho
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
