@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const GITHUB_CONFIG = {
     user: 'web-sas',        // ← troque
     repo: 'jordaci',   // ← troque
-    path: 'images/galeria',           // pasta raiz das imagens
+    path: 'imagens/galeria',           // pasta raiz das imagens
     branch: 'main'                    // ou 'master'
 };
 
