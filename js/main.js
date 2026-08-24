@@ -1,5 +1,6 @@
 /**
  * Jordaci - Costura & Arte
+ * Galeria automática + Lightbox + Filtros inteligentes + WhatsApp contextual
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,10 +20,16 @@ const GITHUB_CONFIG = {
     branch: 'main'
 };
 
+let galleryData = []; // guarda todas as imagens para o lightbox
+
+/* ========================================
+   Galeria Automática
+   ======================================== */
 async function initAutoGallery() {
     const grid = document.getElementById('galleryGrid');
     const loading = document.getElementById('galleryLoading');
     const errorBox = document.getElementById('galleryError');
+    const counterEl = document.getElementById('pecasCounter');
 
     if (!grid) return;
 
@@ -31,30 +38,28 @@ async function initAutoGallery() {
 
     try {
         const baseUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
-        
         const response = await fetch(baseUrl);
-        if (!response.ok) {
-            throw new Error('Erro ao acessar a pasta no GitHub');
-        }
+        if (!response.ok) throw new Error('Erro ao acessar pasta no GitHub');
 
         const items = await response.json();
         const folders = items.filter(item => item.type === 'dir');
         const rootImages = items.filter(item => item.type === 'file' && isImage(item.name));
 
-        let allImages = [];
+        galleryData = [];
 
+        // Imagens na raiz
         rootImages.forEach(file => {
-            allImages.push({
+            galleryData.push({
                 url: file.download_url,
                 name: file.name,
                 category: 'all'
             });
         });
 
+        // Imagens nas subpastas
         for (const folder of folders) {
             const category = folder.name.toLowerCase();
             const folderUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}/${folder.name}?ref=${GITHUB_CONFIG.branch}`;
-            
             const folderRes = await fetch(folderUrl);
             if (!folderRes.ok) continue;
 
@@ -62,7 +67,7 @@ async function initAutoGallery() {
             folderFiles
                 .filter(f => f.type === 'file' && isImage(f.name))
                 .forEach(file => {
-                    allImages.push({
+                    galleryData.push({
                         url: file.download_url,
                         name: file.name,
                         category: category
@@ -72,14 +77,21 @@ async function initAutoGallery() {
 
         grid.innerHTML = '';
 
-        if (allImages.length === 0) {
+        if (galleryData.length === 0) {
             throw new Error('Nenhuma imagem encontrada.');
         }
 
-        allImages.forEach((img, index) => {
+        // Atualiza contador de peças
+        if (counterEl) {
+            counterEl.textContent = `+${galleryData.length}`;
+        }
+
+        // Cria os cards
+        galleryData.forEach((img, index) => {
             const item = document.createElement('div');
             item.className = `gallery-item aspect-square bg-onyx-900 reveal ${index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''}`;
             item.dataset.category = img.category;
+            item.dataset.index = index;
 
             item.innerHTML = `
                 <img src="${img.url}" 
@@ -93,8 +105,14 @@ async function initAutoGallery() {
                 </div>
             `;
 
+            // Clique abre o lightbox
+            item.addEventListener('click', () => openLightbox(index));
+
             grid.appendChild(item);
         });
+
+        // Esconde filtros vazios
+        updateFilterButtons();
 
         initReveal();
         initGalleryFilter();
@@ -125,15 +143,107 @@ function formatCategory(cat) {
     return map[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
 }
 
+/* ========================================
+   Filtros inteligentes (esconde vazios)
+   ======================================== */
+function updateFilterButtons() {
+    const categories = new Set(galleryData.map(img => img.category));
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    filterBtns.forEach(btn => {
+        const filter = btn.getAttribute('data-filter');
+        if (filter === 'all') return; // sempre mostra "Todos"
+
+        if (categories.has(filter)) {
+            btn.classList.remove('hidden');
+        } else {
+            btn.classList.add('hidden');
+        }
+    });
+}
+
+/* ========================================
+   Lightbox
+   ======================================== */
+function openLightbox(index) {
+    const lightbox = document.getElementById('lightbox');
+    const imgEl = document.getElementById('lightboxImg');
+    const titleEl = document.getElementById('lightboxTitle');
+    const categoryEl = document.getElementById('lightboxCategory');
+    const waBtn = document.getElementById('lightboxWhatsapp');
+
+    if (!lightbox || !galleryData[index]) return;
+
+    const img = galleryData[index];
+
+    imgEl.src = img.url;
+    imgEl.alt = img.name;
+    titleEl.textContent = img.name.replace(/\.[^/.]+$/, '');
+    categoryEl.textContent = formatCategory(img.category);
+
+    // WhatsApp contextual
+    const msg = `Olá! Vi este trabalho no site da Jordaci (${formatCategory(img.category)} - ${img.name}) e gostaria de um orçamento.`;
+    waBtn.href = `https://wa.me/5599991325326?text=${encodeURIComponent(msg)}`;
+
+    lightbox.dataset.current = index;
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+    lightbox.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+}
+
+function navigateLightbox(direction) {
+    const lightbox = document.getElementById('lightbox');
+    let current = parseInt(lightbox.dataset.current || 0);
+    current += direction;
+
+    if (current < 0) current = galleryData.length - 1;
+    if (current >= galleryData.length) current = 0;
+
+    openLightbox(current);
+}
+
+function initLightboxEvents() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev')?.addEventListener('click', () => navigateLightbox(-1));
+    document.getElementById('lightboxNext')?.addEventListener('click', () => navigateLightbox(1));
+
+    // Fecha clicando no fundo
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Teclado
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('opacity-0')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+}
+
+// Chama os eventos do lightbox
+document.addEventListener('DOMContentLoaded', initLightboxEvents);
+
+/* ========================================
+   Restante do código
+   ======================================== */
+
 function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
@@ -183,9 +293,7 @@ function initMobileMenu() {
     links.forEach(link => link.addEventListener('click', closeMenu));
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
-            closeMenu();
-        }
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) closeMenu();
     });
 }
 
@@ -246,12 +354,10 @@ function initContactForm() {
         if (message) texto += `*Detalhes:* ${message}\n`;
         texto += `\nGostaria de um orçamento, por favor.`;
 
-        const url = `https://wa.me/5599991325326?text=${encodeURIComponent(texto)}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
+        window.open(`https://wa.me/5599991325326?text=${encodeURIComponent(texto)}`, '_blank');
 
         const modal = document.getElementById('successModal');
         if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-
         form.reset();
     });
 }
@@ -262,7 +368,6 @@ function initSuccessModal() {
     if (!modal) return;
 
     const close = () => modal.classList.add('opacity-0', 'pointer-events-none');
-
     if (closeBtn) closeBtn.addEventListener('click', close);
     modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
     document.addEventListener('keydown', (e) => {
