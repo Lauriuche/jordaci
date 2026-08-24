@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSuccessModal();
     initPrivacyModal();
     initAutoGallery();
+    initLightboxEvents();
 });
 
 const GITHUB_CONFIG = {
@@ -20,7 +21,7 @@ const GITHUB_CONFIG = {
     branch: 'main'
 };
 
-let galleryData = []; // guarda todas as imagens para o lightbox
+let galleryData = [];
 
 /* ========================================
    Galeria Automática
@@ -47,7 +48,6 @@ async function initAutoGallery() {
 
         galleryData = [];
 
-        // Imagens na raiz
         rootImages.forEach(file => {
             galleryData.push({
                 url: file.download_url,
@@ -56,7 +56,6 @@ async function initAutoGallery() {
             });
         });
 
-        // Imagens nas subpastas
         for (const folder of folders) {
             const category = folder.name.toLowerCase();
             const folderUrl = `https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}/${folder.name}?ref=${GITHUB_CONFIG.branch}`;
@@ -81,12 +80,11 @@ async function initAutoGallery() {
             throw new Error('Nenhuma imagem encontrada.');
         }
 
-        // Atualiza contador de peças
+        // Contador real
         if (counterEl) {
             counterEl.textContent = `+${galleryData.length}`;
         }
 
-        // Cria os cards
         galleryData.forEach((img, index) => {
             const item = document.createElement('div');
             item.className = `gallery-item aspect-square bg-onyx-900 reveal ${index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''}`;
@@ -105,15 +103,11 @@ async function initAutoGallery() {
                 </div>
             `;
 
-            // Clique abre o lightbox
             item.addEventListener('click', () => openLightbox(index));
-
             grid.appendChild(item);
         });
 
-        // Esconde filtros vazios
         updateFilterButtons();
-
         initReveal();
         initGalleryFilter();
 
@@ -137,6 +131,7 @@ function formatCategory(cat) {
         vestidos: 'Vestidos',
         esportes: 'Equipagem Esportiva',
         casuais: 'Conjuntos & Shorts',
+        uniformes: 'Fardamentos & Uniformes',   // ← adicione esta linha
         consertos: 'Consertos',
         all: 'Trabalho'
     };
@@ -144,7 +139,7 @@ function formatCategory(cat) {
 }
 
 /* ========================================
-   Filtros inteligentes (esconde vazios)
+   Filtros inteligentes
    ======================================== */
 function updateFilterButtons() {
     const categories = new Set(galleryData.map(img => img.category));
@@ -152,7 +147,7 @@ function updateFilterButtons() {
 
     filterBtns.forEach(btn => {
         const filter = btn.getAttribute('data-filter');
-        if (filter === 'all') return; // sempre mostra "Todos"
+        if (filter === 'all') return;
 
         if (categories.has(filter)) {
             btn.classList.remove('hidden');
@@ -181,7 +176,6 @@ function openLightbox(index) {
     titleEl.textContent = img.name.replace(/\.[^/.]+$/, '');
     categoryEl.textContent = formatCategory(img.category);
 
-    // WhatsApp contextual
     const msg = `Olá! Vi este trabalho no site da Jordaci (${formatCategory(img.category)} - ${img.name}) e gostaria de um orçamento.`;
     waBtn.href = `https://wa.me/5599991325326?text=${encodeURIComponent(msg)}`;
 
@@ -216,12 +210,10 @@ function initLightboxEvents() {
     document.getElementById('lightboxPrev')?.addEventListener('click', () => navigateLightbox(-1));
     document.getElementById('lightboxNext')?.addEventListener('click', () => navigateLightbox(1));
 
-    // Fecha clicando no fundo
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // Teclado
     document.addEventListener('keydown', (e) => {
         if (lightbox.classList.contains('opacity-0')) return;
         if (e.key === 'Escape') closeLightbox();
@@ -230,13 +222,9 @@ function initLightboxEvents() {
     });
 }
 
-// Chama os eventos do lightbox
-document.addEventListener('DOMContentLoaded', initLightboxEvents);
-
 /* ========================================
-   Restante do código
+   Funções auxiliares
    ======================================== */
-
 function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
