@@ -1,17 +1,163 @@
 /**
- * Jordaci - Costura & Arte (v2)
- * Main JavaScript
+ * Jordaci - Costura & Arte (v2 + Galeria Automática GitHub)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initNavbar();
     initMobileMenu();
-    initGalleryFilter();
     initContactForm();
     initSuccessModal();
     initPrivacyModal();
+    initAutoGallery(); // ← nova função
 });
+
+/* ========================================
+   CONFIGURAÇÃO DA GALERIA AUTOMÁTICA
+   ======================================== */
+const GITHUB_CONFIG = {
+    user: 'SEU_USUARIO_GITHUB',        // ← troque
+    repo: 'NOME_DO_SEU_REPOSITORIO',   // ← troque
+    path: 'images/galeria',           // pasta raiz das imagens
+    branch: 'main'                    // ou 'master'
+};
+
+/*
+  ESTRUTURA RECOMENDADA NO REPOSITÓRIO:
+
+  images/
+    galeria/
+      vestidos/
+        foto1.jpg
+        foto2.jpg
+      esportes/
+        uniforme1.jpg
+      casuais/
+        conjunto1.jpg
+      consertos/
+        barra1.jpg
+*/
+
+/* ========================================
+   Galeria Automática via GitHub API
+   ======================================== */
+async function initAutoGallery() {
+    const grid = document.getElementById('galleryGrid');
+    const loading = document.getElementById('galleryLoading');
+    const errorBox = document.getElementById('galleryError');
+
+    if (!grid) return;
+
+    // Mostra loading
+    if (loading) loading.classList.remove('hidden');
+    if (errorBox) errorBox.classList.add('hidden');
+
+    try {
+        const baseUrl = `https://api.github.com/repos/\( {GITHUB_CONFIG.user}/ \){GITHUB_CONFIG.repo}/contents/\( {GITHUB_CONFIG.path}?ref= \){GITHUB_CONFIG.branch}`;
+        
+        const response = await fetch(baseUrl);
+        if (!response.ok) {
+            throw new Error(`Erro ${response.status}: não foi possível acessar a pasta no GitHub`);
+        }
+
+        const items = await response.json();
+
+        // Separa pastas (categorias) e arquivos (imagens soltas)
+        const folders = items.filter(item => item.type === 'dir');
+        const rootImages = items.filter(item => item.type === 'file' && isImage(item.name));
+
+        let allImages = [];
+
+        // 1. Imagens soltas na raiz da pasta
+        rootImages.forEach(file => {
+            allImages.push({
+                url: file.download_url,
+                name: file.name,
+                category: 'all' // ou 'casuais' como padrão
+            });
+        });
+
+        // 2. Imagens dentro de subpastas (categorias)
+        for (const folder of folders) {
+            const category = folder.name.toLowerCase(); // vestidos, esportes, etc.
+            const folderUrl = `https://api.github.com/repos/\( {GITHUB_CONFIG.user}/ \){GITHUB_CONFIG.repo}/contents/\( {GITHUB_CONFIG.path}/ \){folder.name}?ref=${GITHUB_CONFIG.branch}`;
+            
+            const folderRes = await fetch(folderUrl);
+            if (!folderRes.ok) continue;
+
+            const folderFiles = await folderRes.json();
+            folderFiles
+                .filter(f => f.type === 'file' && isImage(f.name))
+                .forEach(file => {
+                    allImages.push({
+                        url: file.download_url,
+                        name: file.name,
+                        category: category
+                    });
+                });
+        }
+
+        // Limpa a grade
+        grid.innerHTML = '';
+
+        if (allImages.length === 0) {
+            throw new Error('Nenhuma imagem encontrada na pasta.');
+        }
+
+        // Cria os cards
+        allImages.forEach((img, index) => {
+            const item = document.createElement('div');
+            item.className = `gallery-item aspect-square bg-onyx-900 reveal ${index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''}`;
+            item.dataset.category = img.category;
+
+            item.innerHTML = `
+                <img src="${img.url}" 
+                     alt="${img.name}" 
+                     width="800" height="800"
+                     class="w-full h-full object-cover" 
+                     loading="lazy">
+                <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <h4 class="text-white font-serif text-xl font-bold mb-1">${formatCategory(img.category)}</h4>
+                    <p class="text-gold text-sm">\( {img.name.replace(/\.[^/.]+ \)/, '')}</p>
+                </div>
+            `;
+
+            grid.appendChild(item);
+        });
+
+        // Reativa o reveal e o filtro
+        initReveal();
+        initGalleryFilter();
+
+    } catch (err) {
+        console.error('Galeria automática:', err);
+        if (errorBox) {
+            errorBox.textContent = 'Não foi possível carregar as imagens. Verifique a configuração do GitHub.';
+            errorBox.classList.remove('hidden');
+        }
+    } finally {
+        if (loading) loading.classList.add('hidden');
+    }
+}
+
+function isImage(filename) {
+    return /\.(jpe?g|png|gif|webp|avif)$/i.test(filename);
+}
+
+function formatCategory(cat) {
+    const map = {
+        vestidos: 'Vestidos',
+        esportes: 'Equipagem Esportiva',
+        casuais: 'Conjuntos & Shorts',
+        consertos: 'Consertos',
+        all: 'Trabalho'
+    };
+    return map[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+}
+
+/* ========================================
+   Restante do código (igual ao anterior)
+   ======================================== */
 
 function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
