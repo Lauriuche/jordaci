@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
    CONFIGURAÇÃO DA GALERIA AUTOMÁTICA
    ======================================== */
 const GITHUB_CONFIG = {
-    user: 'SEU_USUARIO_GITHUB',        // ← troque
-    repo: 'NOME_DO_SEU_REPOSITORIO',   // ← troque
+    user: 'web-sas',        // ← troque
+    repo: 'jordaci',   // ← troque
     path: 'images/galeria',           // pasta raiz das imagens
     branch: 'main'                    // ou 'master'
 };
