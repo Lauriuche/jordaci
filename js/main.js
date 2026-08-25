@@ -227,7 +227,7 @@ function initGalleryFilter() {
             btn.classList.add('active');
 
             currentFilter = btn.getAttribute('data-filter');
-            currentPage = 1; // volta para a primeira página
+            currentPage = 1;
             renderGalleryPage();
         });
     });
