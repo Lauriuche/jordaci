@@ -107,11 +107,11 @@ body.menu-open { overflow: hidden; }
     cursor: not-allowed;
     pointer-events: none;
 }
-/* Paginação - melhor para celular */
+/* Paginação */
 #galleryPagination {
     position: relative;
     z-index: 10;
-    padding-bottom: 80px; /* espaço para o botão do WhatsApp não cobrir */
+    padding-bottom: 24px;   /* bem menor agora */
     gap: 1.5rem;
 }
 
@@ -123,7 +123,7 @@ body.menu-open { overflow: hidden; }
     min-height: 48px;
     font-size: 1.1rem;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation; /* evita delay de toque */
+    touch-action: manipulation;
 }
 
 #galleryPrev:disabled,
@@ -133,7 +133,6 @@ body.menu-open { overflow: hidden; }
     pointer-events: none;
 }
 
-/* No celular deixa os botões um pouco maiores */
 @media (max-width: 640px) {
     #galleryPrev,
     #galleryNext {
@@ -144,6 +143,6 @@ body.menu-open { overflow: hidden; }
     }
 
     #galleryPagination {
-        padding-bottom: 100px; /* mais espaço no mobile */
+        padding-bottom: 32px;  /* só um pouco de espaço no celular */
     }
 }
