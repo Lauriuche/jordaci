@@ -471,24 +471,24 @@
             <!-- preenchido via JS -->
         </div>
 
-        <!-- Paginação (FORA do grid) -->
-        <div class="flex items-center justify-center gap-6 mt-10" id="galleryPagination">
-            <button id="galleryPrev" 
-                    class="w-12 h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center"
-                    aria-label="Página anterior">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <span id="galleryPageInfo" class="text-neutral-400 text-sm font-medium min-w-[60px] text-center">
-                1 / 1
-            </span>
-
-            <button id="galleryNext" 
-                    class="w-12 h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center"
-                    aria-label="Próxima página">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
+       <!-- Paginação -->
+            <div class="flex items-center justify-center gap-6 mt-10 mb-6" id="galleryPagination">
+                <button id="galleryPrev" 
+                        class="w-12 h-12 sm:w-12 sm:h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center active:scale-95"
+                        aria-label="Página anterior">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            
+                <span id="galleryPageInfo" class="text-neutral-300 text-sm font-medium min-w-[70px] text-center">
+                    1 / 1
+                </span>
+            
+                <button id="galleryNext" 
+                        class="w-12 h-12 sm:w-12 sm:h-12 rounded-full border border-white/20 text-white hover:bg-gold hover:text-onyx-900 hover:border-gold transition-all flex items-center justify-center active:scale-95"
+                        aria-label="Próxima página">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
     </div>
 </section>  
     <!-- DEPOIMENTOS -->
